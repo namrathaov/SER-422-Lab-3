@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
+         version="2.5" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"> 
+
+  <servlet>
+    <servlet-name>Lab4Servlet</servlet-name>
+    <servlet-class>edu.asupoly.ser422.lab4.Lab4Servlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Lab4Servlet</servlet-name>
+    <url-pattern>/lab4servlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Lab4Subjects</servlet-name>
+    <servlet-class>edu.asupoly.ser422.lab4.Lab4Subjects</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Lab4Subjects</servlet-name>
+    <url-pattern>/lab4subjects</url-pattern>
+  </servlet-mapping>
+</web-app>

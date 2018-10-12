@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Weather</display-name>
+  <welcome-file-list>
+		<welcome-file>Index</welcome-file>
+	</welcome-file-list>
+<servlet>
+		<description></description>
+		<display-name>Index</display-name>
+		<servlet-name>Index</servlet-name>
+		<servlet-class>client.tempuri.Index</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Index</servlet-name>
+		<url-pattern>/Index</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>Input</display-name>
+		<servlet-name>Input</servlet-name>
+		<servlet-class>client.tempuri.Input</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Input</servlet-name>
+		<url-pattern>/Input</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>Method</display-name>
+		<servlet-name>Method</servlet-name>
+		<servlet-class>client.tempuri.Method</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Method</servlet-name>
+		<url-pattern>/Method</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>Result</display-name>
+		<servlet-name>Result</servlet-name>
+		<servlet-class>client.tempuri.Result</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Result</servlet-name>
+		<url-pattern>/Result</url-pattern>
+	</servlet-mapping>
+</web-app>

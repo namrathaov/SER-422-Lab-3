@@ -1,0 +1,46 @@
+<project name="WeatherAPI" default="deploy">
+
+  <property file="build.properties" />
+
+  <path id="classpath">
+		<fileset dir="./">
+			<include name="${srclib}/*.jar" />
+		</fileset>
+  	<fileset dir="C:/Users/ovnam/SER422/tomcat-8.5.24 - 8080/apache-tomcat-8.5.24/webapps/axis2/">
+  				<include name="${srclib}/*.jar" />
+  			</fileset>
+  </path>
+
+  <target name="compile">
+    <mkdir dir="${destdir}/WEB-INF/classes"/>
+    <mkdir dir="${destdir}/WEB-INF/lib/"/>
+    <copy todir="${destdir}/WEB-INF/lib">
+      <fileset dir="${srclib}"/>
+    </copy>
+    <javac classpathref="classpath" srcdir="src" destdir="${destdir}/WEB-INF/classes/" />
+    </target>
+
+  <target name="build" depends="compile">
+    <copy file="WEB-INF/web.xml" todir="${destdir}/WEB-INF"/>
+  	<war destfile="${warfile}" basedir="${destdir}" needxmlfile="false"/>
+  </target>
+
+  <target name="deploy" depends="build">
+    <copy file="${warfile}" todir="${tomcat_webapps}" />
+  </target>
+
+  <target name="submit" depends="clean">
+    <jar destfile="${submit.jar}" basedir="." excludes="bin/**,${srclib}/**,classes/**,build/**">
+    </jar>
+  </target>
+
+  <target name="clean">
+    <delete file="${warfile}" />
+  	<delete file="${submit.jar}" />
+    <delete dir="${destdir}"/>
+  </target>
+
+  <target name="undeploy">
+    <delete file="${tomcat_webapps}/${warfile}" />
+  </target>
+</project>

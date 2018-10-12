@@ -1,0 +1,59 @@
+<project name="lab2task1" default="clean" basedir=".">
+	<property file="build.properties"/>
+  <target name="init">
+    <tstamp/>
+  	<mkdir dir="${src.dir}"/>
+    <mkdir dir="${classes.dir}"/>
+  </target>
+
+  <target name="compile" depends="init">
+    
+    <javac includeantruntime="false"  srcdir="${src.dir}" destdir="${classes.dir}">
+    	<classpath>
+    	        <fileset dir="${tomcat.home}/lib" includes="servlet-api.jar"/>
+    	        <pathelement path="${classes.dir}" />
+    	      </classpath>
+    	</javac>
+	
+  </target>
+	
+	<target name="deploy" depends="dist">
+   <copy file="lab2task1.war" todir="${tomcat.deploydir}" />
+  </target>
+  <target name="build" depends="compile">
+    <mkdir dir="${build.home}"/>
+    <mkdir dir="${build.home}/WEB-INF"/>
+    <copy todir="${build.home}/WEB-INF">
+      <fileset dir="." includes="x/**" excludes="${classes.dir}/driver/**"/>
+    </copy>
+    <copy file="${basedir}/WEB-INF/web.xml" tofile="${build.home}/WEB-INF/web.xml"/>
+  	<copy todir="${basedir}/WebContent/WEB-INF">
+  	      <fileset dir="." includes="${classes.dir}/**" excludes="${classes.dir}/driver/**"/>
+    </copy>
+  	 </target>
+  <target name="dist" depends="build">
+    <jar destfile="${dist.jar}" basedir="${build.home}"/>
+ </target>
+<target name="submit" depends="dist">
+    <jar destfile="${submit.jar}" basedir="." includes="build.xml,web.xml,${src.dir}/**,${classes.dir}/**">
+     </jar>
+  </target>
+<target name="buildwar" depends="dist">
+	    <war basedir="${basedir}/" destfile="lab2task1.war"
+	     webxml="${basedir}/WebContent/WEB-INF/web.xml">
+	        <exclude name="WEB-INF/**" />
+			<exclude name="lab2task1.war"/>
+	        <webinf dir="${basedir}/WEB-INF/">
+	            <include name="**/*.jar" />
+	        	<include name="${classes.dir}/**"/>
+	        </webinf>
+	    </war>
+	</target>
+  <target name="clean" depends="buildwar">
+    <delete dir="${build.home}"/>
+    <delete dir="${dist.jar}"/>
+  </target>
+  <target name="cleanall" depends="clean">
+    <delete file="${submit.jar}"/>
+  </target>
+</project>
